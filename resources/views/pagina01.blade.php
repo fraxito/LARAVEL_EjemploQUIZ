@@ -1,16 +1,18 @@
-<!-- Stored in resources/views/pagina01.blade.php -->
-
 @extends('layouts.ejemplolayout')
 
 @section('titulo', 'Página 01 del proyecto')
 
-@section('barralateral')
-    @parent
 
-    <p>Esta parte se añade a la barra lateral original (no la sobreescribe). Pertenece a la página 01</p>
+@section('barralateral')
+   
+    <p> Esta parte está en la barra lateral</p>
 @endsection
 
+
+
 @section('contenido')
-    <h2>Este es el body de la página 01.</h2>
-    <a href="{{ url('pagina02') }}" class="btn btn-xs btn-info pull-right">página 02</a>
+    <p> Este está en el body</p>
+    
+    <a href="{{ url('pagina02') }}" class="btn btn-xs btn-info pull-rigth"> pagina 02 </a>
+    
 @endsection

@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('pagina01');
 });
 
+
 Route::get('/pagina02', function () {
     return view('pagina02');
 });
+
