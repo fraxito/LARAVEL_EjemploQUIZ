@@ -18,10 +18,10 @@
 var pregunta = @json($pregunta);
 var correcta = pregunta[0].correcta;
   $('#preguntas').append('<button class="btn btn-block btn-dark disabled"> {{$pregunta[0]->enunciado}} </button><br><br>');
-  $('#preguntas').append('<button id="1" class="btn btn-block btn-primary " onclick="chequeaRespuesta(1)"> {{$pregunta[0]->r1}} </button><br><br>');
-  $('#preguntas').append('<button id="2" class="btn btn-block btn-primary " onclick="chequeaRespuesta(2)"> {{$pregunta[0]->r2}} </button><br><br>'); 
-  $('#preguntas').append('<button id="3" class="btn btn-block btn-primary " onclick="chequeaRespuesta(3)"> {{$pregunta[0]->r3}} </button><br><br>'); 
-  $('#preguntas').append('<button id="4" class="btn btn-block btn-primary " onclick="chequeaRespuesta(4)"> {{$pregunta[0]->r4}} </button><br><br>');   
+  $('#preguntas').append('<button id="1" class="btn btn-block btn-primary " onclick="chequeaRespuesta(1)"> '+pregunta[0].r1+' </button><br><br>');
+  $('#preguntas').append('<button id="2" class="btn btn-block btn-primary " onclick="chequeaRespuesta(2)"> '+pregunta[0].r2+' </button><br><br>'); 
+  $('#preguntas').append('<button id="3" class="btn btn-block btn-primary " onclick="chequeaRespuesta(3)"> '+pregunta[0].r3+' </button><br><br>'); 
+  $('#preguntas').append('<button id="4" class="btn btn-block btn-primary " onclick="chequeaRespuesta(4)"> '+pregunta[0].r4+' </button><br><br>');   
 
 function chequeaRespuesta(_respuesta){
     if (_respuesta == correcta){
