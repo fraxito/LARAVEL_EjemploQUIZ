@@ -11,9 +11,11 @@ class PreguntasController extends Controller
        return Preguntas::where('tema', $tema)->inRandomOrder()->first();  
     }
 
-    public function carga_pregunta($tema){
+    public function carga_pregunta($tema, $marcador){
         return view('pregunta')->with('pregunta', Preguntas::where('tema', $tema)->inRandomOrder()->limit(1)->get())
-                               ->with('tema', $tema);
+                               ->with('tema', $tema)
+                               ->with('marcador',$marcador);
+                               // se pondría ->with('marcador', \Crypt::decrypt($marcador) ); si estuviera encriptado
     }
 
 }
