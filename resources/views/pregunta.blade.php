@@ -6,17 +6,13 @@
         margin: 10 0 10 0 !important;
     }
 </style>
-
 <div class="container">
-
 <!-- aqui va el temporizador  -->
- <br>
+<br>
  <div id="barratiempo" class="progress">
   <div id="tiempo" class="progress-bar progress-bar-striped primary  progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
-
 <br>
-<!-- los botones del juego  -->
     <div class="row">
         <div class="col-3">
             <h1 id="marcador"></h1>
@@ -35,10 +31,10 @@ var pregunta = @json($pregunta)
     $('#marcador').html('{{$marcador}}');
 
     $('#preguntas').append('<button class="btn btn-block btn-dark disabled">'+pregunta[0].enunciado+' </button>');
-    $('#preguntas').append('<button id="1" class="btn btn-block btn-primary " onclick="chequeaRespuesta(1)">'+pregunta[0].r1+' </button>');
-    $('#preguntas').append('<button id="2" class="btn btn-block btn-primary " onclick="chequeaRespuesta(2)">'+pregunta[0].r2+' </button>'); 
-    $('#preguntas').append('<button id="3" class="btn btn-block btn-primary " onclick="chequeaRespuesta(3)">'+pregunta[0].r3+' </button>'); 
-    $('#preguntas').append('<button id="4" class="btn btn-block btn-primary " onclick="chequeaRespuesta(4)">'+pregunta[0].r4+'  </button>');   
+    $('#preguntas').append('<button id="1" class="btn btn-block btn-primary" onclick="chequeaRespuesta(1)">'+pregunta[0].r1+' </button>');
+    $('#preguntas').append('<button id="2" class="btn btn-block btn-primary" onclick="chequeaRespuesta(2)">'+pregunta[0].r2+' </button>'); 
+    $('#preguntas').append('<button id="3" class="btn btn-block btn-primary" onclick="chequeaRespuesta(3)">'+pregunta[0].r3+' </button>'); 
+    $('#preguntas').append('<button id="4" class="btn btn-block btn-primary" onclick="chequeaRespuesta(4)">'+pregunta[0].r4+'  </button>');   
 
 function chequeaRespuesta(_respuesta){
     $('button').addClass('disabled').prop("onclick", null);
@@ -49,36 +45,34 @@ function chequeaRespuesta(_respuesta){
     else{
         $('#'+_respuesta).removeClass('btn-primary').addClass('btn-danger');
         $('#'+ pregunta[0].correcta).removeClass('btn-primary').addClass('btn-success');
-        $('#preguntas').append('<button class="btn btn-block btn-dark " onclick="pierde()"> PREGUNTA SIGUIENTE  </button>');   
-    }
-}
+        $('#preguntas').append('<button class="btn btn-block btn-dark " onclick="pierde()"> maaaal  </button>');   
 
-function sigue(){
-    window.location.replace(href="{{ url('pregunta', [$tema, ($marcador=$marcador+1)]) }}");
+    }   
 }
 
 function pierde(){
-    window.location.replace(href="{{ url('pregunta', [$tema, $marcador]) }}");
+    window.location.replace(href="{{ url('pregunta', [$tema, Crypt::encrypt($marcador)]) }}");
+}
+function sigue(){
+    window.location.replace(href="{{ url('pregunta', [$tema, Crypt::encrypt($marcador=$marcador+1)]) }}");
 }
 
-
 //el siguiente método controla la barra de tiempo
-        var segundo = 1;
-        var seguimos = true; 
-        var progress;
-        var t = 2000;
-     $(document).ready(function() {
+    var segundo = 1;
+    var seguimos = true; 
+    var progress;
+
+    $(document).ready(function() {
         dibujaBarraTiempo();
-     });
+    });
 
-
-
-     function dibujaBarraTiempo(){
-        //temporizador de la barra        
+    function dibujaBarraTiempo(){
+        //inicializo el temporizador de la barra        
         clearInterval(progress);
+        //crea el temporizador
         progress = setInterval(function() {
-            var $caja = $("#barratiempo");
-            if ($("#tiempo").width() >= $caja.width()) {
+            var caja = $("#barratiempo");
+            if ($("#tiempo").width() >= caja.width()) {
                 clearInterval(progress);
                 segundo = 0;
                 //AQUI PONES LA FUNCIÓN QUE QUIERES EJECUTAR
@@ -86,10 +80,11 @@ function pierde(){
                 chequeaRespuesta(-1);
             } else {
                 if(seguimos){           
-                    $("#tiempo").width($("#tiempo").width()+$caja.width()/10);
+                    $("#tiempo").width($("#tiempo").width()+caja.width()/10);
                     segundo++; 
                 } 
-            }  
+            } 
+             //colorea de distinta forma 
             if (segundo < 5){
                 $("#tiempo").removeClass("bg-warning");
                 $("#tiempo").removeClass("bg-danger");
@@ -100,9 +95,10 @@ function pierde(){
             } else {
                 $("#tiempo").removeClass("bg-warning");
                 $("#tiempo").addClass("bg-danger");
-            }               
+            }  
+            //para poner el segundo en que estamos             
             $("#tiempo").text(segundo);
-        }, 3600);
-     }
+        }, 3600);       
+    }
 
 </script>
